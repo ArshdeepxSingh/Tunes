@@ -4,6 +4,7 @@ import 'package:tunes/common/widgets/button/basic_app_button.dart';
 import 'package:tunes/core/config/assets/app_images.dart';
 import 'package:tunes/core/config/assets/app_vectors.dart';
 import 'package:tunes/core/config/theme/app_colors.dart';
+import 'package:tunes/presentation/choose_mode/pages/choose_mode.dart';
 
 class GetStartedPage extends StatelessWidget {
   const GetStartedPage({super.key});
@@ -58,7 +59,9 @@ class GetStartedPage extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: 20),
-                BasicAppButton(onPressed: () {}, title: "Get Started")
+                BasicAppButton(onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => ChooseModePage()));
+                }, title: "Get Started")
               ],
             ),
           ),
