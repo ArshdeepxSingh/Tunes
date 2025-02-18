@@ -1,12 +1,12 @@
-import 'dart:ui';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:tunes/common/widgets/button/basic_app_button.dart';
 import 'package:tunes/core/config/assets/app_images.dart';
 import 'package:tunes/core/config/assets/app_vectors.dart';
-import 'package:tunes/core/config/theme/app_colors.dart';
+import 'package:tunes/presentation/choose_mode/bloc/theme_cubit.dart';
+import 'package:tunes/testpage.dart';
 
 class ChooseModePage extends StatelessWidget {
   const ChooseModePage({super.key});
@@ -46,7 +46,7 @@ class ChooseModePage extends StatelessWidget {
                 Text(
                   "Choose Mode",
                   style: TextStyle(
-                      fontSize: 40,
+                      fontSize: 30,
                       fontWeight: FontWeight.bold,
                       color: Colors.white),
                   textAlign: TextAlign.center,
@@ -57,43 +57,72 @@ class ChooseModePage extends StatelessWidget {
                   children: [
                     Column(
                       children: [
-                        InkWell(
-                          onTap: () {},
-                          borderRadius: BorderRadius.circular(50),
-                          child: Container(
-                            width: 70,
-                            height: 70,
-                            decoration: BoxDecoration(
-                              color: Color.fromARGB(15, 95, 95, 95), // Transparent red (ARGB)
-                              shape: BoxShape.circle,
-                            ),
-                            child: Icon(CupertinoIcons.brightness ,color: Colors.white,),
+                        BlocBuilder<ThemeCubit, ThemeMode>(
+                            builder: (context, theme) {
+                              return GestureDetector(
+                                onTap: () {
+                                  context.read<ThemeCubit>().updateTheme(ThemeMode.light);
+                                },
+                                child: Container(
+                                  width: 70,
+                                  height: 70,
+                                  decoration: BoxDecoration(
+                                    color: theme == ThemeMode.light
+                                        ? Colors.grey.shade700 // Highlight if light mode is selected
+                                        : Color.fromARGB(15, 95, 95, 95),
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: Icon(
+                                    CupertinoIcons.brightness,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              );
+                            },
                           ),
+                        SizedBox(
+                          height: 5,
                         ),
-                        SizedBox(height: 5,),
-                        Text("Light Mode", style: TextStyle(color: Colors.white),)
+                        Text(
+                          "Light Mode",
+                          style: TextStyle(color: Colors.white),
+                        )
                       ],
                     ),
-
-
                     SizedBox(width: 40),
                     Column(
                       children: [
-                        InkWell(
-                          onTap: () {},
-                          borderRadius: BorderRadius.circular(50),
-                          child: Container(
-                            width: 70,
-                            height: 70,
-                            decoration: BoxDecoration(
-                              color: Color.fromARGB(15, 95, 95, 95), // Transparent red (ARGB)
-                              shape: BoxShape.circle,
-                            ),
-                            child: Icon(CupertinoIcons.moon ,color: Colors.white,),
-                          ),
+                        BlocBuilder<ThemeCubit, ThemeMode>(
+                          builder: (context, theme) {
+                            return GestureDetector(
+                              onTap: () {
+                                context.read<ThemeCubit>().updateTheme(ThemeMode.dark);
+                              },
+                              child: Container(
+                                width: 70,
+                                height: 70,
+                                decoration: BoxDecoration(
+                                  color: theme == ThemeMode.dark
+                                      ? Colors.grey.shade700 // Highlight if dark mode is selected
+                                      : Color.fromARGB(15, 95, 95, 95),
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Icon(
+                                  CupertinoIcons.moon,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            );
+                          },
                         ),
-                        SizedBox(height: 5,),
-                        Text("Dark Mode", style: TextStyle(color: Colors.white),)
+
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Text(
+                          "Dark Mode",
+                          style: TextStyle(color: Colors.white),
+                        )
                       ],
                     ),
                   ],
@@ -104,8 +133,7 @@ class ChooseModePage extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                                  ChooseModePage()));
+                              builder: (BuildContext context) => Testpage()));
                     },
                     title: "Continue")
               ],
