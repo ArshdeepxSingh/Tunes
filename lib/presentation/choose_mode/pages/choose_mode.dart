@@ -5,8 +5,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:tunes/common/widgets/button/basic_app_button.dart';
 import 'package:tunes/core/config/assets/app_images.dart';
 import 'package:tunes/core/config/assets/app_vectors.dart';
+import 'package:tunes/presentation/auth/pages/signup.dart';
 import 'package:tunes/presentation/choose_mode/bloc/theme_cubit.dart';
-import 'package:tunes/testpage.dart';
+
 
 class ChooseModePage extends StatelessWidget {
   const ChooseModePage({super.key});
@@ -133,7 +134,7 @@ class ChooseModePage extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (BuildContext context) => Testpage()));
+                              builder: (BuildContext context) => Signup()));
                     },
                     title: "Continue")
               ],
