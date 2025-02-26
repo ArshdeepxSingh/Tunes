@@ -2,6 +2,7 @@ import 'package:get_it/get_it.dart';
 import 'package:tunes/data/repository/auth/auth_repository_impl.dart';
 import 'package:tunes/data/sources/auth/auth_firebase_service.dart';
 import 'package:tunes/domain/respository/auth/auth.dart';
+import 'package:tunes/domain/usecases/auth/signin.dart';
 import 'package:tunes/domain/usecases/auth/signup.dart';
 
 final GetIt sl = GetIt.instance;
@@ -22,6 +23,12 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<SignupUseCase>(
     SignupUseCase()
   );
+
+  sl.registerSingleton<SignInUseCase>(
+    SignInUseCase()
+  );
+
+
 }
 
 
